@@ -1,3 +1,30 @@
+### Evidencias
+##### 1. Despues de crear el repositorio en github, se clona en local y se crea el proyecto nestjs
+##### 2. Se cofigura el Dockerfile para poder hacer el build de la imagen
+![Dockerfile](assets/1.png)
+##### 3. Prueba de que se puede hacer el build de la imagen localmente
+![Prueba](assets/2.png)
+##### 4. Crear token en Docker Hub para poder subir la imagen y configurar los secrets en github
+![Token](assets/3-1.png)
+![Secrets](assets/3-2.png)
+##### 5. Se configura el workflow para que se ejecute cuando se haga un push a la rama master
+![Workflow](assets/4-1.png)
+![Workflow](assets/4-2.png)
+##### 6. Se hace un push a la rama master y se comprueba que se ejecuta el workflow
+![Action](assets/5.png)
+
+##### 7. Se comprueba que se ha subido la imagen al repositorio de Docker Hub
+![DockerHub](assets/6.png)
+
+##### 8. Hacemos un cambio en el código y hacemos un push a la rama master, se comprueba que se ejecuta el workflow y se sube la imagen al repositorio de Docker Hub
+![Action](assets/7-1.png)
+![DockerHub](assets/7-2.png)
+
+##### 9. Cambio en el workflow para que a la version de la imagen se le añada un numero random
+![Workflow](assets/8-1.png)
+![Action](assets/8-3.png)
+![DockerHub](assets/8-2.png)
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
