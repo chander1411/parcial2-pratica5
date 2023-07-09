@@ -25,6 +25,14 @@ jobs:
         format: "${major}.${minor}.${patch}-prerelease${increment}"
       id: version
 
+# - explicación: Este paso genera un número aleatorio entre 1 y 100 y lo guarda en una variable de entorno llamada RANDOM_NUMBER
+    - name: Generar número aleatorio
+      id: random
+      run: |
+        echo "Generando número aleatorio..."
+        RANDOM_NUMBER=$(shuf -i 1-100 -n 1)
+        echo "::set-output name=random_number::$RANDOM_NUMBER"
+
 # - explicación: Iniciar sesión en Docker desde GIT
     - name: Docker Login
       env:
@@ -39,8 +47,9 @@ jobs:
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        RANDOM_NUMBER: ${{ steps.random.outputs.random_number }}
       run: |
-        docker build -t $DOCKER_USER/pratica5:$NEW_VERSION .
+        docker build -t $DOCKER_USER/pratica5:$NEW_VERSION-$RANDOM_NUMBER .
         docker build -t $DOCKER_USER/pratica5:latest .
 
 # - explicación: Subir imagen al docker hub aplicando el parámetro NEW_VERSION
@@ -48,6 +57,7 @@ jobs:
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        RANDOM_NUMBER: ${{ steps.random.outputs.random_number }}
       run: |
-        docker push $DOCKER_USER/pratica5:$NEW_VERSION
+        docker push $DOCKER_USER/pratica5:$NEW_VERSION-$RANDOM_NUMBER
         docker push $DOCKER_USER/pratica5:latest
